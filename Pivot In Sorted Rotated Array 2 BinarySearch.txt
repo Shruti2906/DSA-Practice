@@ -1,0 +1,40 @@
+#include <iostream>
+#include<vector>
+//4 5 6 1 2 3 Pivot=6
+//5 6 1 2 3 Pivot= 6
+using namespace std;
+
+int getPivot(vector<int>arr, int n){
+
+    int start = 0;
+    int e = n-1;
+    int mid = (start+e)/2;
+
+    while(start<e){
+
+        if(mid==start){
+            return e;
+        }
+
+        if(arr[mid] <= arr[n-1]){
+            e=mid-1;
+        }
+        else{
+            start=mid;
+        }
+        mid=(start+e)/2;
+    }
+
+    return start;//or return end or return mid;
+}
+
+int main()
+{
+    vector<int> arr={ 4, 5, 6, 1, 2, 3};
+    int n=arr.size();
+    cout<<"\nPivot Element is at Index : "<<getPivot(arr, n);
+
+    cout << "\n\n\n\n\n\n\n" << endl;
+    return 0;
+}
+
