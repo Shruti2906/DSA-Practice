@@ -14,7 +14,7 @@ int getPivot(vector<int>arr, int n){
             start=mid+1;
         }
         else{
-            e=mid-1;
+            e=mid;
         }
         mid=start+(e-start)/2;
     }
