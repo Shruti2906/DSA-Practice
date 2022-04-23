@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    int findComplement(int num) {
+  
+        int mask=0;
+        while(mask < num){
+            mask = mask<<1;
+            mask  = mask| 1;
+            
+        }
+      int ans=(~num) & mask;
+        return ans;
+    }
+};
+
+int main() {
+  int num;
+  cout<<"enter digit : ";
+  cin>>num;
+ 
+  Solution s;
+  //cout<<"\nnum: "<<num;
+ 
+  cout<<"Number is : "<<s.findComplement(num);;
+
+  return 0;
+}
