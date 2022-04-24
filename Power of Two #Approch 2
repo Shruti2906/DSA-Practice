@@ -1,0 +1,36 @@
+#include<iostream.h>
+using namespace std;
+
+  //#Approach 3
+  //Check each Power Till the number..
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+   
+   if(n<=0){
+            return false;
+        }
+        long int power_num=0;
+        for(int i=0; power_num<n; i++){
+            
+            power_num = pow(2, i);
+            cout<<"p : "<<power_num;
+            if(power_num == n){
+                return true;
+            }
+             
+        }
+       
+        return false;
+    }
+};
+
+int main(){
+  Solution s;
+  int n;
+  cout<<"\nEnter The No : ";
+  cin>>n;
+  cout<<"\n"<<n<<" can be represented as power of 2 : "<<s.isPowerOfTwo(n);
+  return 0;
+}
