@@ -1,0 +1,41 @@
+#include<iostream.h>
+using namespace std;
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        
+        //all the numbers that can be represented as power of 2 will have only 1 set bit in their binary representation.
+        
+        //#Approach 1
+        //count set bits..
+        
+        if(n<=0){
+            return false;
+        }
+        else{
+                int cnt = 0;
+                while(n!=0){
+          
+                     int bit = n&1;
+                     n = n>>1; 
+                //   cout<<"n&1: "<<n&1;  //not valid
+                     cout<<"bit: "<<bit;
+                     if(bit==1){
+                     cnt++;
+                     }
+       
+                }
+            return cnt == 1;
+        }
+     }
+};
+
+int main(){
+  Solution s;
+  int n;
+  cout<<"\nEnter The No : ";
+  cin>>n;
+  cout<<"\n"<<n<<" can be represented as power of 2 : "<<s.isPowerOfTwo(n);
+  return 0;
+}
