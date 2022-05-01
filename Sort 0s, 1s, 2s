@@ -1,0 +1,40 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+      
+        int i=0; 
+        int j=nums.size()-1;
+        int k=0;
+        
+        while(k<=j){
+             switch(nums[k]){
+                case 0:
+                     swap(nums[i], nums[k]);
+                     i++; 
+                     k++;
+                break;
+                case 1:
+                     k++;
+                     break;
+                case 2:
+                   swap(nums[k], nums[j]);
+                   j--;
+                break;
+           }
+        }
+        
+    }
+};
+
+int main(){
+
+  Solution s;
+  vector nums = {2, 0, 1, 1, 0, 2};
+  s.sortColors(nums);
+  
+  for(int i=0; i<nums.size(); i++{
+    cout<<nums[i<<" ";
+  }
+  
+  return 0;
+}
