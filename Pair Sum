@@ -1,0 +1,56 @@
+#include <iostream> 
+#include<vector>
+using namespace std;
+
+vector<vector<int> > pairSum(vector<int> &arr, int s){
+  
+	int i=0;
+	int j=0;
+
+	vector<vector<int> > v;
+
+	while(i<arr.size()-1){
+			j=i+1;
+		while(j<arr.size()){
+			if(arr[i]+arr[j] == s){
+				vector<int> tmp;
+				tmp.push_back(arr[i]);
+				tmp.push_back(arr[j]);
+				v.push_back(tmp);
+				
+				j++;
+			}
+			else{
+				j++;
+			}
+		}
+		i++;
+	}
+	return v;
+}
+
+int main() {
+	
+ 	vector<int> vect;
+	vect.push_back(1);
+	vect.push_back(2);
+	vect.push_back(3);
+	vect.push_back(4);
+	vect.push_back(5);
+ 
+	int s=5;
+	
+	vector<vector<int> > ans  ;
+
+	ans=pairSum(vect, s);
+	
+	 for (int i = 0; i < ans.size(); i++) {
+	 	for (int j=0; j<ans[i].size(); j++){
+		 
+            cout << ans[i][j] << " ";
+		}
+		cout<<"\n";
+	}
+	
+	return 0;
+}
