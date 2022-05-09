@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int sum=0;
+        int n = nums.size();
+        
+        int i=0;
+        while(i<nums.size()){
+            sum += nums[i];
+            i++;
+        }
+    
+        int sum1 = n*(n-1)/2;
+        
+        return sum-sum1;
+    }
+};
+
+int main(){
+
+  vector<int> v{1, 2, 3, 4, 4};
+  
+  Solution s;
+  s.findDuplicate(v);
+  
+  return 0;
+ }
