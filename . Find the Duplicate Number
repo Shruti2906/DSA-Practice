@@ -1,3 +1,4 @@
+//Find Duplicate in an Array of 1+N
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
