@@ -23,7 +23,7 @@ int main() {
             }
         }
         
-        //flip the matrix vertically i.e swap column 1 with colimn 3 in case of 3 cols vector.
+        //flip the matrix vertically i.e swap column 1 with column 3 in case of 3 cols vector.
        for(int i=0; i<matrix.size(); i++){
             for(int j=0; j<matrix[i].size()/2; j++){
                 
