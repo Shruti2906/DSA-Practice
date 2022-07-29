@@ -17,11 +17,11 @@ void MoveNegatives(int arr[], int size){
     }
     else if(arr[left]>0 && arr[right]<0){
        int temp;
-      temp = arr[left];
-      arr[left]=arr[right];
-      arr[right]=temp;
-        left++;
-        right--;
+       temp = arr[left];
+       arr[left]=arr[right];
+       arr[right]=temp;
+       left++;
+       right--;
     }
     else{
       left++;
