@@ -20,7 +20,6 @@ public:
 int main(){
 
   vector<int> v{1, 2, 3, 4, 4};
-  
   Solution s;
   s.findDuplicate(v);
   
