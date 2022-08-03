@@ -14,8 +14,11 @@ class Solution
             int k=0;
             vector<int> v;
             while(i<n1 && j<n2 && k<n3){
+            
+            //find max of elemnt from 3 arrays.
                 int Max=max(A[i],max(B[j],C[k]));
-                if(A[i]==B[j] && B[j]==C[k]){
+            //if equal found push in array and increament counter till all 'equal' elements are traversed. skeep furthus part
+            if(A[i]==B[j] && B[j]==C[k]){
                     v.push_back(A[i]);
                 
                     while(i<n1 && A[i]==A[i+1]){
