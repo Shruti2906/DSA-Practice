@@ -1,4 +1,4 @@
-//Minimum swaps required bring element k together
+//Minimum swaps required bring element less equal k together
 
 // { Driver Code Starts
 // C++ program to find minimum swaps required
