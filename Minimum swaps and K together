@@ -24,19 +24,23 @@ public:
                 ++good;
             }
         }
-        //count bad nos in window of size good
+        //count bad nos in " window of size 'good' "
         for(int i=0; i<good; ++i){
             if(arr[i]>k){
                 ++bad;
             }
         }
+	
+	//size of window will be equal to no of good numbers
+	
         int ans=bad;
         for(int i=0,j=good;j<n; ++i,++j){
             //excluding element from previous window
-            if(arr[i]>k){
+            if(arr[i]>k){	//check if it was bad no
                 --bad;
             }
-            if(arr[j]>k){
+	    //adding the element to window
+            if(arr[j]>k){	//check if it is bad
                 ++bad;
             }
             ans= min(ans,bad);
