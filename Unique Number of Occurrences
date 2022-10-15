@@ -3,16 +3,21 @@ public:
     bool uniqueOccurrences(vector<int>& arr) {
         
         map<int,int> mp;
+        
+        1 2 2 3
+        //store the frequency of occurance in map   1 : 1
+        //                                          2 : 2
+           //                                       3 : 1
         for(int x:arr){
             mp[x]++;
         }
         
         set<int> st;
-        for(auto it:mp){
-            if(st.count(it.second)>0){
+        for(auto it:mp){                    //iterarte over map 2nd value(frequency of occurance
+            if(st.count(it.second)>0){      //check if the vallue already present in set    if yes then duplicate value has found thus return false
                 return false;
             }
-            else{
+            else{                           //if not then insert it int the set
                 st.insert(it.second);
             }
         }
