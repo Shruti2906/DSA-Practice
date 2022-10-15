@@ -1,3 +1,5 @@
+//Find triplet that sum to a given value
+
 // { Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
