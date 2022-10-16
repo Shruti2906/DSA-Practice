@@ -18,7 +18,7 @@ class Solution
             
             //find max of elemnt from 3 arrays.
                 int Max=max(A[i],max(B[j],C[k]));
-            //if equal found push in array and increament counter till all 'equal' elements are traversed. skeep furthus part
+            //if equal found push in array and increament counter till all 'equal' elements are traversed. skeep furthur part
             if(A[i]==B[j] && B[j]==C[k]){
                     v.push_back(A[i]);
                 
