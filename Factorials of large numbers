@@ -1,0 +1,68 @@
+//Find Factorial Of a Large Number - GFG
+//as Factorial of a large number goes beyound range of int, long int and even long long int
+//Thus we store it in an array , using simple multiple method we do in normal calculation
+
+
+//{ Driver Code Starts
+// Initial Template for C++
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+
+class Solution {
+public:
+    
+    vector<int> multiply(vector<int> res, int n){
+        
+        int carry = 0;
+        
+        for(int i=0; i<res.size(); i++){
+            
+            int product = res[i]*n+carry;
+            res[i] = product%10;
+            carry = product/10;    
+        }
+        
+        while(carry){
+            res.push_back(carry%10);
+            carry = carry/10;
+            
+        }
+        return res;
+    }
+    vector<int> factorial(int N){
+        
+        vector<int> res;
+        //factorial of zero and one is 1
+        res.push_back(1);
+        
+        //multiple will return resultant array till i
+        for(int i=2; i<=N; i++){
+            res = multiply(res, i);
+        }
+        
+        reverse(res.begin(), res.end());
+        return res;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N;
+        cin >> N;
+        Solution ob;
+        vector<int> result = ob.factorial(N);
+        for (int i = 0; i < result.size(); ++i){
+            cout<< result[i];
+        }
+        cout << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
