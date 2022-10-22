@@ -1,0 +1,70 @@
+//Minimum Number of Platforms Required for a Railway/Bus Station - GFG
+
+//sort both arrival and departure arrays
+//as we are not intrested in knowing exactly which train is arriving and leaving the platform 
+//we intrested in knowing if there if any train arrived or leaving the station.
+//so that we can count the maximum number of trains available at station at simultaneously
+//i.e minimum number of platforms required for the station for one day.
+
+
+//{ Driver Code Starts
+// Program to find minimum number of platforms
+// required on a railway station
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution{
+    public:
+    //Function to find the minimum number of platforms required at the
+    //railway station such that no train waits.
+    int findPlatform(int arr[], int dep[], int n)
+    {
+        int platform_Needed = 1;
+        int finalResult = 1;
+        int i = 1, j = 0;
+        
+        sort(arr, arr+n);
+        sort(dep, dep+n);
+        
+        while(i<n && j<n){
+            if(arr[i] <= dep[j]){
+                platform_Needed++;
+                i++;
+            }
+            else if(arr[i] > dep[j]){
+                platform_Needed--;
+                j++;
+            }
+            finalResult = max(finalResult, platform_Needed);
+        }
+        
+        return finalResult;
+    }
+};
+
+
+//{ Driver Code Starts.
+// Driver code
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--) 
+    {
+        int n;
+        cin>>n;
+        int arr[n];
+        int dep[n];
+        for(int i=0;i<n;i++)
+            cin>>arr[i];
+        for(int j=0;j<n;j++){
+            cin>>dep[j];
+        }
+        Solution ob;
+        cout <<ob.findPlatform(arr, dep, n)<<endl;
+    } 
+   return 0;
+}
+// } Driver Code Ends
