@@ -1,0 +1,62 @@
+//Spiral Matrix - Leetcode
+//NOTE : This Solution gave TLE(Time Limit Exceeded) on Leetcode
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+     
+        int start_row = 0;
+        int start_col = 0;
+        int end_row = matrix.size()-1;
+        int end_col = matrix.size()-1;
+        int cnt = 0;
+     
+        for(int i=0; i<matrix.size(); i++){
+            for(int j=0; j<matrix[i].size(); j++){
+                cnt++;
+            }
+        }
+        
+        vector<int> ans;
+        
+        while(cnt != 0){
+            
+            //case 1
+            //print starting row
+            for(int i=start_col; i<=end_col; i++){
+                //cout<<matrix[start_row][i];
+                ans.push_back(matrix[start_row][i]);
+                cnt--;
+            }
+            start_row++;
+            
+            //case 2
+            //printing last column
+            for(int i=start_row; i<=end_row; i++){
+                //cout<<matrix[i][end_col];
+                ans.push_back(matrix[i][end_col]);
+                cnt--;
+            }
+            end_col--;
+            
+            //case 3
+            //printing last row
+            for(int i=end_col; i>=start_col; i--){
+                //cout<<matrix[end_row][i];
+                ans.push_back(matrix[end_row][i]);
+                cnt--;
+            }
+            end_row--;
+            
+            //case 4
+            //printing starting column
+            for(int i=end_row; i>=start_row; i--){
+                //cout<<matrix[i][start_col];
+                ans.push_back(matrix[i][start_col]);
+                cnt--;
+            }
+            start_col++;
+        }
+        return ans;
+    }
+};
