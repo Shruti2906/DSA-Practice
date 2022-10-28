@@ -24,6 +24,7 @@ int main() {
         }
         
         //flip the matrix vertically i.e swap column 1 with column 3 in case of 3 cols vector.
+       
        for(int i=0; i<matrix.size(); i++){
             for(int j=0; j<matrix[i].size()/2; j++){
                 
@@ -32,6 +33,19 @@ int main() {
                 matrix[i][matrix[i].size()-j-1] = temp;
             }
         }
+	
+		OR 
+		
+/*	 //flip vertically      -easy to understand loop
+	    for(int i=0,k=matrix.size()-1; i<k; i++,k--){
+	        for(int j=0; j<matrix.size(); j++){
+	            int temp = matrix[i][j];
+	            matrix[i][j] = matrix[k][j];
+	            matrix[k][j] = temp;
+	        }
+	    }
+	
+*/	
 	//print matrix
   for(int i=0; i<matrix.size(); i++){
             for(int j=0; j<matrix[i].size(); j++){
