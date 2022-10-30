@@ -1,0 +1,37 @@
+//Print a matrix in Reverse Wave Form - GFG
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	
+	int rows = 5, cols = 4;
+    int matrix[rows][cols] = {{  1,   6,   11,   16},
+                    {  2,   7,   12,   17},
+                    {  3,   8,   13,   18},
+                    {  4,   9,   14,   19},
+                    {  5,  10,   15,   20}};
+    
+    int k = 0;
+    for(int i=0; i<cols; i++){
+        if(k == 0){
+            while(k < rows){
+                cout<<matrix[k][i]<<"\t";
+                k++;
+            }
+            k = rows-1;
+        }
+        else if(k == (rows-1)){
+            while(k >= 0){
+                cout<<matrix[k][i]<<"\t";
+                k--;
+            }
+            k = 0;
+        }
+    }
+  
+	return 0;
+}
+//Time Complexity: O(N2)
+//Auxiliary Space: O(1)
