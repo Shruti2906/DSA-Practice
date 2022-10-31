@@ -1,0 +1,55 @@
+//704. Binary Search - Leetcode
+//T.C: O(logn)  S.C: O(1)
+
+//NOTE : Catch here is mid calculation
+//       (e+s)/2 could lead to the value lager than integer range
+//        Thus s+(e-s)/2 is better to use
+//        s+(e-s)/2 => s+(e/2)-(s/2) => (e/2 - s/2) => (e-s)/2              ...{as s/1 - s/2 => (2s-s)/2 => s/2}
+
+//What is Binary Search?
+//Why Binary Search?
+
+//Binary Search Could be implemented by 2 ways
+//1. Iterative Method
+//2. Recursive Method
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        
+        
+        int start = 0;
+        int end = nums.size()-1;
+        int mid = (start+end)/2;
+        
+        while(start <= end){
+            
+            if(target == nums[mid]){
+                return mid;
+            }
+            else if(target < nums[mid]){
+                end = mid-1;
+            }
+            else{
+                start = mid+1;
+            }
+            
+            mid = start+(end-start)/2;
+        }
+        return -1;
+       }
+};
+
+/*
+//What is Binary Search?
+    Binary Search is a searching algorithm used in a sorted array by 
+    repeatedly dividing the search interval in half.
+    The idea of binary search is to use the information that the
+    array is sorted and reduce the time complexity to O(Log n). 
+
+
+Why?
+     We basically ignore half of the elements just after one comparison.
+     Thus reduce the time complexity to O(Log n). 
+
+*/
