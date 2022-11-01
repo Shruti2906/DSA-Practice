@@ -1,0 +1,86 @@
+
+//no of occurance in given sorted array- extension of left most and right most position of gievn element in an array.
+//T.C: O(log n)  S.C: O(1)
+
+//approach : first findot first(left most) and last(right most) occurance in an array then simply subtract (last - first)+1.
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int leftMost(vector<int> v, int x){
+        
+        int ans = -1;
+        int start = 0;
+        int end = v.size()-1;
+        int mid = start+(end-start)/2;
+        
+        while(start <= end){
+            if(x == v[mid]){
+                ans = mid;
+                end = mid-1;
+            }
+            else if(x < v[mid]){
+                end = mid-1;
+                
+            }
+            else{
+                start = mid+1;
+            }
+            mid = start+(end-start)/2;
+        }
+        return ans;
+    }
+    
+    int rightMost(vector<int> v, int x){
+        
+        int ans = -1;
+        int start =  0;
+        int end = v.size()-1;
+        int mid = start+(end-start)/2;
+        
+        while(start <= end){
+            if(x == v[mid]){
+                ans = mid;
+                start = mid+1;
+            }
+            else if(x < v[mid]){
+                end = mid-1;
+            }
+            else{
+                start = mid+1;
+            }
+            mid = start+(end-start)/2;
+        }
+        return ans;
+    }
+    int searchRange(vector<int>& nums, int target) {
+       
+        vector<int> vec;
+        vec.push_back(leftMost(nums, target));
+        vec.push_back(rightMost(nums, target));
+        int range = 0;
+        if(vec[0] != -1){
+            range = (vec[1]-vec[0])+1;
+        }
+        
+        return range;
+    }
+
+int main()
+{
+//5 1 2 3 3 4 3
+    vector<int> nums;
+    nums.push_back(1);
+    nums.push_back(2);
+    nums.push_back(3);
+    nums.push_back(3);
+    nums.push_back(4);
+    
+    int target = 3;
+    
+    int ans = searchRange(nums, 3);
+    cout<<"No Of Ocurrances of "<<target<<" in given array is : "<<ans;
+    
+	return 0;
+}
