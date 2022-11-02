@@ -1,0 +1,50 @@
+
+//Find Pivot element in sorted rotated array - 
+//pivot is the rightmost element on left side or leftmost element on right side- here we will find rightmost on left side.
+//e.g {5, 6, 7, 8, 9, 10, 1, 2, 3} pivot element here is 10
+// pivot-1 < pivot > pivot+1   <--make use of this property and
+// for elements on left side ele > arr[0]. for elements on right side ele < arr[0]
+
+//T.c: O(logn) S.c:O(1)
+
+#include<iostream>
+
+using namespace std;
+
+int findPivot(int arr[], int n){
+
+    int s = 0;
+    int e = n-1;
+    int mid = s+(e-s)/2;
+
+    while(s <= e){
+        if(arr[mid]>arr[mid+1] && arr[mid]>arr[mid-1]){ //element is pivot
+            return mid;
+        }
+        else{   //mid could be either lie on left or right part
+            if(arr[mid]>arr[0]){  //mid lies on left part
+                s = mid+1;
+            }
+            else{ //mid lies on right part of the array
+                e = mid-1;
+            }
+        }
+        mid = s+(e-s)/2;
+    }
+    return -1;
+}
+
+int main(){
+    
+    //{5, 6, 7, 8, 9, 10, 1, 2, 3}
+    int n = 9;
+    int arr[] = {5, 6, 7, 8, 9, 0, 1, 2, 3};
+    int ans = findPivot(arr, n);
+
+    if(ans != -1)
+        cout<<"Pivot element "<<arr[ans]<<" is found at index "<<ans;
+    else    
+        cout<<"Something Went Wrong!";
+
+    return 0;
+}
