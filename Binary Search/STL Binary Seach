@@ -1,0 +1,102 @@
+//STL Binary Search
+//1.binary_seach(arr.begin(), arr.end(), num);
+//2.lower_bound(arr.begin(), arr.end(), num);
+//3.upper_ound(arr.begin(), arr.end(), num);
+
+//T.C O(log N) S.c O(1)
+
+//return true of false
+#include <bits/stdc++.h>
+using namespace std;
+
+//# 1
+int main()
+{
+    vector<int> arr = { 10, 15, 20, 25, 30, 35 };
+ 
+    // using binary_search to check if 15 exists
+    if (binary_search(arr.begin(), arr.end(), 15))
+        cout << "15 exists in vector";
+    else
+        cout << "15 does not exist";
+ 
+    cout << endl;
+ 
+    // using binary_search to check if 23 exists
+    if (binary_search(arr.begin(), arr.end(), 23))
+        cout << "23 exists in vector";
+    else
+        cout << "23 does not exist";
+ 
+    cout << endl;
+}
+
+//# 2
+//lower_bound(arr.begin(), arr.end(), num);
+//return pointer to position of num - if only one ocuurence of num.
+//return pointer to position of first occurrence of num - if multiple occurrance of num exist.
+//return pointer to position of element just heigher than num - if num does NOT exist.
+//  i.e the position where num would be added if added in existing sorted array.
+
+
+//NOTE : subtracting arr.begin()(initial pointer) from returned position will give exact index.
+
+int main()
+{
+    vector<int> arr1 = { 10, 15, 20, 25, 30, 35 };  //single occurrence
+ 
+    vector<int> arr2 = { 10, 15, 20, 20, 25, 30, 35 };  //multiple occurrences
+ 
+    vector<int> arr3 = { 10, 15, 25, 30, 35 };  //no occurrence
+ 
+    // using lower_bound() to check if 20 exists
+    
+    cout << "The position of 20 using lower_bound " (in single occurrence case) : "; // prints 2
+    cout <<"\n"<< lower_bound(arr1.begin(), arr1.end(), 20) - arr1.begin();
+ 
+    // using lower_bound() to check if 20 exists
+    cout << "The position of 20 using lower_bound "(in multiple occurrence case) : "; // prints 2
+            
+    cout <<"\n"<< lower_bound(arr2.begin(), arr2.end(), 20) - arr2.begin();
+ 
+    // using lower_bound() to check if 20 exists
+    
+    cout << "The position of 20 using lower_bound "(in no occurrence case) : "; // prints 2 ( index of next higher)
+            
+    cout << lower_bound(arr3.begin(), arr3.end(), 20) - arr3.begin();
+ 
+}
+
+
+//# 3
+//upper_bound(arr.begin(), arr.end(), num);
+//return pointer to position of number just heigher than num - if only one ocuurence of num.
+//return pointer to first position of the next higher number than the last occurrence of num  - if multiple occurrance of num exist.
+//return pointer to position of element just heigher than num - if num does NOT exist.
+
+int main()
+{   vector<int> arr1 = { 10, 15, 20, 25, 30, 35 };
+ 
+    vector<int> arr2 = { 10, 15, 20, 20, 25, 30, 35 };
+ 
+    vector<int> arr3 = { 10, 15, 25, 30, 35 };
+ 
+    // using upper_bound() to check if 20 exists
+    
+    cout << "The position of 20 using upper_bound" (in single occurrence case) : "; // prints 3
+            
+    cout << upper_bound(arr1.begin(), arr1.end(), 20) - arr1.begin();
+ 
+    // using upper_bound() to check if 20 exists
+ 
+    cout << "The position of 20 using upper_bound "(in multiple occurrence case) : ";  // prints 4
+            
+    cout << upper_bound(arr2.begin(), arr2.end(), 20) - arr2.begin();
+ 
+    // using upper_bound() to check if 20 exists
+ 
+    cout << "The position of 20 using upper_bound " (in no occurrence case) : ";  // prints 2 ( index of next higher)
+            
+    cout << upper_bound(arr3.begin(), arr3.end(), 20) - arr3.begin();
+ 
+}
