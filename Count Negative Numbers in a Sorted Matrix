@@ -1,0 +1,38 @@
+//1351. Count Negative Numbers in a Sorted Matrix - Leetcode
+//easy
+//matrix BinarySearch
+
+//T.C: O(m+n) - Don't understand how(not able to calculate T.C).
+
+//approach : 
+// start from last row first col index (i.e first element in last row)
+//if element<0 - all elements right side of it are -ve thus add count in ans.
+//if element>0 - all elements left side of it are +ve, left side might contain -ve elements, so let's check there
+//NOTE : previous row's right side of same col could not contain -ve(smalller ele) 
+//  e.g if 2nd row 2col contain -ve then, 1st row elements above 2 col could not contain -ve(they are greater than 2nd [row] [col] value).
+//  thus no need to check there.
+
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        
+        int m = grid.size();
+        int n = grid[0].size();
+        
+        int row = m-1;
+        int col = 0;
+        int ans = 0;
+        
+        while(row>=0 && col<n){
+            
+            if(grid[row][col]<0){
+                
+                ans += (n-col);
+                row--;
+            }
+            else col++;
+        }
+        
+        return ans;
+    }
+};
