@@ -1,0 +1,80 @@
+
+//Question link: https://www.spoj.com/problems/EKO/
+
+//Binary Search Advance Question EKO SPOJ
+
+/*
+Question Explain:
+    we have given n no of trees each has some height in mteres, and given target no (m) i.e minimun wood required to be cut (in meteres)
+    we have showblade to cut trees, we need to set it at some height to cut all trees(with same height)
+    we need to put showblade at max height possible so that we will get minimum wood required(at least m).
+    
+*/
+
+//Aproach
+//Find Search Space  (which is 0 to max height tree)
+//Apply binary search on search space
+
+/*
+  Thus we will apply Bs on search space 0 to max height (i.e 0 to 20 here)
+  mid = 10, if we put showblade at 10 then we'll get(20-10 + 15-10 + 10-10 + 17-10) = 17 m wood   (And we need 7 m wood)
+  thus 10 is possible soln but we can try putting showblade at heigher height tahn 10, thus move to right (i.e s = mid+1)
+  now we got 15 (mid) which also possible soln , move to right
+  we git 18 which is noy possible soln as (20-18) = 2m wood, which is <7 thus our final ans is 15.
+  Thus showblade is put at max height 15m to get minimum 7m wood.
+
+*/
+
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+ bool isPossibleSol(int arr[], int n, int mid, int m){
+
+    int diff;
+    int cnt = 0;
+    for(int i=0; i<n; i++){
+        if(arr[i]>mid){   //need to cut tree only if showblade is lower than its height.
+            diff = arr[i]-mid;
+            cnt = cnt+diff;
+        }       
+    }
+    if(cnt>=m){
+        return true;
+    }
+    else{
+        return false;
+    }
+ }
+
+int main(){
+
+ int n = 4;
+    int arr[4] = {20, 15, 10, 17};
+    int m = 7;  //minimum wood required
+    sort(arr, arr+n); //just to get max height tree.
+
+    int ans = -1;
+    int s = 0;
+    int e = arr[n-1];
+ 
+    long int mid = s+(e-s)/2;
+      while(s <= e){
+        
+        if(isPossibleSol(arr, n, mid, m)){
+        //possible soln
+            ans = mid;
+             s = mid+1;//move to right/top
+         }
+         else{
+             e = mid-1;//move to left/low
+         }
+         mid = s+(e-s)/2;
+     }
+
+       cout<<"showblade should be put at height : "<<ans<<" meteres";
+
+return 0;
+
+}
