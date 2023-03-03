@@ -1,0 +1,45 @@
+//Question : Find the Missing Number in a sorted array GFG
+
+//Question Link: https://www.geeksforgeeks.org/find-the-missing-number/
+
+//Difficulty: Easy
+
+/*Given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in list. One of the integers is missing in the list. Write an efficient code to find the missing integer.
+
+Input : arr[] = [1, 2, 3, 4, 6, 7, 8]
+Output : 5
+
+Input : arr[] = [1, 2, 3, 4, 5, 6, 8, 9]
+Output : 7
+*/
+
+#include <iostream>
+#include<vector>
+
+using namespace std;
+
+int findMissingELe(vector<int> arr){
+
+  int s = 0;
+  int e = arr.size()-1;
+  int mid = s+(e-s)/2;
+
+  while(s < e){//mid is in left part of missing ele
+    if(arr[mid]-mid == 1){
+      s = mid+1;
+    }
+    else{//if arr[mid]-mid == 2
+      e = mid;
+    }
+    mid = s+(e-s)/2;
+  }
+  return arr[e]-1;
+}
+
+int main() {
+
+  vector<int> arr{1, 2, 3, 4, 6, 7, 8};
+  cout<<"\nMissing Element is : "<<findMissingELe(arr);
+}
+
+//TC: O(log n)
