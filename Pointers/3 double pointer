@@ -1,0 +1,22 @@
+//pointer to pointer
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+  int a = 5;
+  int *p = & a;
+  int **q = &p;
+  
+  cout<<"\na \t\t:\t\t "<<a;//5
+  cout<<"\n&a \t\t:\t\t "<<&a;//104
+  cout<<"\np \t\t:\t\t "<<p;//104
+  cout<<"\n&p \t\t:\t\t "<<&p;//216
+  cout<<"\n*p \t\t:\t\t "<<*p;//5
+  cout<<"\nq \t\t:\t\t "<<q;//216
+  cout<<"\n&q \t\t:\t\t "<<&q;//328
+  cout<<"\n*q \t\t:\t\t "<<*q;//104
+  cout<<"\n**q \t:\t\t "<<**q;//5
+  
+  }
