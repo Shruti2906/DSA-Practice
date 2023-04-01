@@ -1,0 +1,20 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+  int a = 5;
+  int *p = &a;
+  int *q = p;//copy of p, now it will point to a same as p
+  char ch = 'a';
+  char *cptr = &ch;
+  cout << "\na : " << a;
+  cout << "\n&a : " << &a;
+  cout << "\np : " << p;
+  cout << "\n*p : " << *p;
+  cout << "\n&p : " << &p;
+
+  cout << "\n\nsizeof(p) : " << sizeof(p);
+  cout << "\nsizof(cptr): " << sizeof(cptr);
+}
