@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+  int arr[] = {1, 2, 3, 4, 5, 6};
+  int *p = arr;
+  
+  cout<<"\narr : "<<arr;
+  cout<<"\n&arr : "<<&arr;
+  cout<<"\n&arr[0] : "<<&arr[0];
+
+  //arr, &arr, &arr[0] all are same memory loc, pointing to base address.
+
+  cout<<"\n*arr : "<<*arr;
+  cout<<"\narr[0] : "<<arr[0];
+  cout<<"\n*arr+1 : "<<*arr+1;
+  cout<<"\n*(arr)+1 : "<<*(arr)+1;
+  cout<<"\n*(arr+1) : "<<*(arr+1);
+  cout<<"\narr[1] : "<<arr[1];
+  cout<<"\n*(arr+2) : "<<*(arr+2);
+  cout<<"\narr[2] : "<<arr[2];
+
+
+  //arr[i] is internally *(arr+i);
+  //Therefore i[arr] == arr[i], as both internally are *(arr+i) & *(i+arr)
+
+
+  cout<<"\n*(p+2) : "<<*(p+2);
+
+  cout<<"\n\nsizeof(arr : "<<sizeof(arr);  //6*4, arr size*int size
+  cout<<"\nsizeof(p) : "<<sizeof(p);
+  cout<<"\nsizeof(*p) : "<<sizeof(*p);
+
+  //int *ptr = &arr[0];
+  //int *ptr = &arr ;
+
+  char ch[]="abcde";
+  char *chptr = ch;
+  cout<<"\n\n\nch : "<<ch;
+  cout<<"\n&ch : "<<&ch;
+  cout<<"\nch[0] : "<<ch[0];
+  cout<<"\n&chptr : "<<&chptr;
+  cout<<"\nchptr : "<<chptr;
+    cout<<"\n*chptr : "<<*chptr;
+    cout<<"\n*(ch+3) : "<<*(ch+3);
+  cout<<"\n*(chptr+3) : "<<*(chptr+3);
+  cout<<"\n*chptr : "<<*chptr;//*(chptr+0 = a
+   cout<<"\nchptr : "<<chptr;//print all character from index 0
+  cout<<"\nchptr+2 : "<<chptr+2;//print all character from index 2
+  cout<<"\nchptr+6 : "<<chptr+6;//print all character from index 6
+
+  char c = 'k';
+  char *kptr = ch;
+  cout<<"\nkptr : "<<kptr;//keep printing untill it get null ptr(/0)
+  }
