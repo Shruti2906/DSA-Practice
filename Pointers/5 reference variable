@@ -1,0 +1,22 @@
+//reference variable- same memory different name.
+#include <iostream>
+
+using namespace std;
+
+void solve(int a){
+  a++;
+}
+
+int main() {
+
+  int a = 5;
+  int &b = a;
+  cout<<"\na : "<<a;
+  cout<<"\nb : "<<b;
+
+  solve(a);
+
+  cout<<"\n\nafter : ";
+  cout<<"\na : "<<a;
+  cout<<"\nb : "<<b;
+}
