@@ -1,0 +1,160 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+  public:
+    int data;
+    Node* next;
+
+    Node(){
+      this->data = 0;
+      this->next = NULL;
+    }
+    Node(int data){
+          this->data = data;
+          this->next = NULL;
+    }
+  ~Node(){
+    cout<<"Node value : "<<this->data<<" deleted.!\n";
+  }
+};
+  
+void insertAtHead(Node* &head, int data){
+  //step 1
+  Node* newNode = new Node(data);
+  
+  //step 2
+  newNode->next = head;
+
+  //step 3
+  head = newNode;
+}
+
+void insertAtTail(Node* &head, int data){
+  Node* newNode = new Node(data);
+  Node* tmp = head;
+  while(tmp->next != NULL){
+    tmp = tmp->next;
+  }
+  tmp->next = newNode;
+}
+
+int findLength (Node* &head){
+  int len = 0;
+  Node* tmp = head;
+  while(tmp != NULL){
+    tmp = tmp->next;
+    len++;
+  }
+  return len;
+}
+
+void insertAtPosition(int data, int position, Node* &head){
+  Node* newNode = new Node(data);
+  if(head == NULL){
+    head = newNode;
+    // tail = newNode;
+    return;
+  }
+  //insert at head
+  if(position == 0){
+    insertAtHead(head, data);
+    return;
+  }
+  //insert at tail
+  int len = findLength(head);
+  if(position == len){
+    insertAtTail(head, data);
+    return;
+  }
+  int i = 1;
+  Node* prev = head;
+  while(i < position){
+   prev = prev->next;
+    i++;
+  }
+  Node* curr = prev->next;
+  newNode->next = curr;
+  prev->next = newNode;
+}
+
+void deleteNode(int position,Node* &head){
+  //deleting 1st nodee
+  if(head == NULL){
+    cout<<"cannot delete , LL is empty.!";
+    return;
+  }
+  if(position == 1){
+    Node* tmp = head;
+    head = head->next;
+    delete tmp;//calling destructor
+  }
+
+  //deleting last node
+  int len = findLength(head);
+  if(position == len){
+     //find prev
+    int i = 1;
+    Node* prev = head;
+    while(i < position-1){
+      prev = prev-1;
+      i++;
+    }    
+      //step2
+    prev->next = NULL;
+    Node* tmp = head;
+    while(tmp->next != NULL){
+      tmp = tmp->next;
+    }
+    ///step 4
+    //tail = prev;
+    //step 5
+    delete tmp;
+    return;
+  }
+
+  //deleting middle node
+  int i = 1;
+  Node* prev = head;
+  while(i < position-1){
+    prev = prev->next;
+    i++;
+  }
+  Node* curr = prev->next;
+  prev->next = curr->next;
+  curr->next = NULL;
+}
+
+void print(Node* &head){
+
+  Node* temp = head;
+  while(temp != NULL){
+    cout<<"\t"<<temp->data;
+    temp = temp->next;
+  }
+}
+
+int main() {
+
+  Node* head = new Node();
+  insertAtHead(head, 20);
+  insertAtHead(head, 30); 
+  insertAtHead(head, 40);
+  insertAtHead(head, 50);
+
+  cout<<"\nafter insertion at head : \n\n";
+  print(head);
+
+  cout<<"\nafter insertion at tail : \n\n";
+  insertAtTail(head, 100);
+  print(head);
+
+  cout<<"\nafter insertion at given position : \n\n";
+  insertAtPosition(101, 6,head);
+  print(head);
+
+  
+cout<<"\nafter deletion\n" ;
+  deleteNode(2, head);
+  print(head);
+}
