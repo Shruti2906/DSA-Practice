@@ -1,0 +1,577 @@
+** Thinking skill:=
+
+whenever the question coming in your exam always try to see:
+	-If I'm putting both the pointers at start, am I having single option
+	-No, then let me put one pointer in the start and one pointer in the back. now am I having one option , good else
+	-let me put  both the pointers at the back.
+   keep trying like this.
+
+
+Whenever you have two options you cannot decide which one is better -> 2 pointer algorithm will not work 
+
+-> 2 pointer algorithm will only work when there is exactly 1 option → so you can move in that direction towards your solution. 
+
+	
+--------------------------------------
+
+Two pointer masterclass:   https://docs.google.com/document/d/1BAtrKGHmF-OxSRuHtrdtR_5iG24nIGi1Oa7mjEKaumY/edit?pli=1
+
+*** only 2 tricks are there in two pointer
+1) i and j start at same index
+2) (i and j apart)i will start from start j will start from end
+
+---------------------------------------------------
+Sort 2 D array in java using built in method:
+
+	    int arr[][] = new int[difficulty.length][2];
+	//insert some values
+        Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
+
+
+
+—--------------------------------------------------------------------------------------
+
+### Template for problems:- [i………………………..j] < = k 
+
+	Q.1 Number of subarrays whose sum <= K (All numbers in the array>=0) 
+
+		Desc:-> [2 1 1 5 8] 
+			K = 4
+		1) Brute Force:  https://replit.com/@PATILSHRUTI/TwoPtr-NoOfSubarraysWithSumlessk1-BruteForce#src/main/java/Main.java
+				 generate all subarrays.
+				TC:O(N^2)  SC: O(1)
+		2) optimized: https://replit.com/@PATILSHRUTI/TwoPtr-NoOfSubarraysWithSumlessk2-optimized#src/main/java/Main.java
+				TC:O(N) SC:O(1)
+			desc: 
+				start i,j at 0, till j<n
+					move j until sum<=k
+					if sum>k,  
+						no point in moving j, move i until sum<=k
+					//i will not got beyond j+1
+—-----------------------------------------------------------------
+
+Q. given two sorted arrays ; both of size N ;  you have to find a pair of numbers such that sum of those numbers <=x and as close as possible to x
+	Refer doc:https://docs.google.com/document/d/13sbEeg9c3NT1cMfyichvK2WOF4pv8yWaSrWXRnQOM44/edit
+
+
+—------------------------------------------------------------------
+	Q.2 Number of subarrays whose count of distinct number <= K 
+		1) Brute Force:  https://replit.com/@PATILSHRUTI/TwoPtr-noOfSubarraysWithDisctinctEleCountlessk1-BruteForce#src/main/java/Main.java
+			generate all subarrays, store ele->freq in map check map.size()<=k 
+		
+		2)Optimized:  https://replit.com/@PATILSHRUTI/TwoPtr-noOfSubarraysWithDisctinctEleCountlessk2-optimized
+			TC:O(N)   SC: O(N)
+			similar to Q.1
+
+	Q.3  Number of pairs whose diff <=K 
+		1) Brute Force: https://replit.com/@PATILSHRUTI/TwoPtr-noOfPairsWhoseDiff-lessk1-BruteForce#src/main/java/Main.java
+		2) Optimized:  https://replit.com/@PATILSHRUTI/TwoPtr-noOfPairsWhoseDiff-lessk2-Optimized
+
+https://docs.google.com/document/d/1go_h1BaUdOBMSDcMPbwwnQfsXbzZaKh7R9sc0qnKbQE/edit
+
+—--------------------------------------------
+Q. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+code:https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/
+	Desc:using treemap for getting the smallest( firstKey() ) & largest (lastKey()) element.
+
+—-----------------------------------------------
+
+Q.4 Given an array B and integer k; find the number of pairs such that b[i] + b[j] <= k 
+	Code: 
+	desc:	1) Brute Force:  https://replit.com/@PATILSHRUTI/2Ptr-countNoOfPairWithSumlessk#src/main/java/Main.java
+			(i,j) :- iterate all pairs. 
+			(0,1)
+			(0,2)...(0,n-1)
+			(1,2)(1,3)...(0,n-1)  and so on.
+				for(int i=0; i<n; i++){
+      					for(int j=i+1; j<n; j++){				//TC: O(N^2)  SC:O(1)
+					        if((arr[i]+arr[j])<=k)
+					          cnt++;					        
+				       }
+			    	}
+		2) little optimization:   https://replit.com/@PATILSHRUTI/2Ptr-countNoOfPairWithSumlessk2-littleOptimized#src/main/java/Main.java
+			sort(arr)
+				for(int i=0; i<n; i++){
+      					for(int j=(n-1); j>i; j--){
+					        if((arr[i]+arr[j])<=k)
+					          cnt += j-i;					        
+						  break;
+				       }
+			    	}								//TC: O(N^2+NlogN)  SC: O(1)
+
+
+		3) Optimized:  https://replit.com/@PATILSHRUTI/2Ptr-countNoOfPairWithSumlessk3-Optimized#src/main/java/Main.java
+			Arrays.sort(arr);
+		        for(int i=0,j=n-1; i<n; i++){
+		          int sum = arr[i]+arr[j];
+		          while(sum>k && i!=j){
+		            j--;
+		            sum = arr[i]+arr[j];
+		          }
+		          if(i==j){
+		            break;					TC: O(N+ NlogN) = O(NlogN)
+		          }						SC: O(1)
+	        	  cnt += j-i;
+		        }	
+Nice doc: https://docs.google.com/document/d/1BAtrKGHmF-OxSRuHtrdtR_5iG24nIGi1Oa7mjEKaumY/edit
+-----------------------------------
+
+Q.5 Given an array B find the number of pairs such that 
+	L <= (b[i] + b[j]) <= R 
+	
+	Desc:	
+		0 1 2 3 4 5 6 
+		L = 3 R = 5
+
+		f(g) = number of pairs such that b[i] + b[j] <=g 
+		Answer = F[R] - F[L-1]
+		O(N) to calculate F[L-1] 
+		O(N) to calculate F[R]
+		Hence O(2N + Nlog N(for sorting)] = O(NlogN)
+		
+		explanation: f(5) = 9 (no of pairs with sum 1,2,3,4,5)  -  f(2) = 2(no of pairs with sum 1,2)    
+				i.e 9-5 = 4
+	Nice doc:https://docs.google.com/document/d/1_BkU4-Fq2GSngUWcbbacwtcqHRpOEgSfHDBaqhvp5zY/edit
+-------------------------------------------
+
+Q.6  Two Sum
+	code: https://leetcode.com/submissions/detail/1270286732/
+	Desc:
+		Brute force:check all pair TC:O(n^2)  SC: O(1)
+		Hashing: checking for target-A[i] in map. TC: O(n)    SC: O(n)
+		2 ptr: make Pair class(to store-> idx & val). Sort by val.
+			l=0  r=n-1
+				sum=pair[l].val+pair[r].val 
+			If (sum == target)  => return
+				Else if sum<target  => l++
+				Else r–
+		TC: O(n)	SC: O(1)
+
+---------------
+Q.7 Given 2 sorted arrays of size N and integer K, find pair such that their sum<=k and as close as possible to k. 
+	code:  https://replit.com/@PATILSHRUTI/Two-pointerOneAtStartOneAtBack#src/main/java/Main.java
+	doc:  https://docs.google.com/document/d/1M-JGoGCAL9jBgIHiiZKPK81RpWJsm1bR5pBgNYudGgg/edit
+	desc:
+	    Brute Force: generate all pairs and check sum
+	    2 ptr: 
+		start i at start of arr1, j at end of arr2.
+		if sum<=k	//keep track of ans, increase the sum
+			i++
+		else
+			j--	//decrease the sum
+
+		TC: O(2N) = O(N)	SC: O(1)	
+
+
+---------------
+Q.8
+	code: https://www.geeksforgeeks.org/problems/find-the-closest-pair-from-two-arrays4215/1
+	desc: i=0, j=n-1
+		find smallest close no and largest close no to x.
+		ans = min(|smallestClose-x|,  |largestClose-x|)
+		
+session 3
+
+---------------
+Q.9	Squares of a Sorted Array
+	code:  https://leetcode.com/problems/squares-of-a-sorted-array/submissions/1272924684/
+	TC: O(N)   SC:  O(1)
+	desc:   nums = [-4,-1,0,3,10]
+		Output: [0,1,9,16,100]
+	after squaring the arr = [16,1,0,9,100], after sorting ans = [0,1,9,16,100]
+		i=0, j=n-1, l=n-1
+		while(i<=j)
+			if(abs(nums[i]>abs[nums[j]) =>  ans[l--]=square(nums[i]); i++;
+			else =>  ans[l--]=square(nums[j]); j--;
+	TC: O(n)   SC: O(1)
+
+---------------
+
+Q.10 Given an array of size “N”; find the longest subarray which has all distinct numbers in it.
+B = [ 3 2 4 5 2 6 7 8 9 10] 
+O/P - 8
+Code: Brute Force: https://replit.com/@PATILSHRUTI/2Ptr-LargestSubarrayWithAllDistinctNos-1-Brute-Force#src/main/java/Main.java
+Efficient: 
+		https://replit.com/@PATILSHRUTI/2Ptr-LargestSubarrayWithAllDistinctNos-2-Efficient#src/main/java/Main.java
+start with i=j=0, move j(++) till distinct ele found.
+  keep updating max subarray length.
+if duplicate ele found => move i(++) till already present duplicate element's index. keep removing all ele till then.
+
+now i = duplicate ele's index+1 & j=i+1
+now again check if(map.containsKey(j)).
+TC: O(2N)   SC: O(N)
+------------------------------
+** IMP
+	
+    2 Ptr Template [i……………….j]
+
+Q.11 Given an array B ; find the number of pairs such that b[i] + b[j] <= k.
+	Code:
+		1] Brute Force:    TC: O(N^2)   SC: O(1)
+			Generate all subarrays, check if(b[i] + b[j] <= k), update count.
+			for(int i=0; i<n; i++){
+for(int j=i+1; j<n; j++){
+if(b[i] + b[j] <= k) cnt++;
+}
+}  
+2] Efficient: 
+	Desc: we are optimizing the j part
+		0 1 2 3 4 5 6 7  k=6
+
+
+	       i=0,  j=7
+	        while(i<j):
+		0+7> k;  //invalid thus;  =>  j- -  //j=6
+		0+6  //invalid      j- -   //j=5
+		.
+		0+5 < k; 	//valid;   
+			 cnt += 5(j-i)  =>  if 0+5<k(i.e valid) then all 0+1, 0+2..0+4 all are valid.
+But here is the game…….. 
+Because (0,6) and (0,7) are not valid henceforth (1,6) and (1,7) are automatically invalid. 
+We’ll start from,
+        i=1, j=5
+	1+5>6	//not valid;    j- -    //j=4
+1+4<6	//valid;    cnt +=j-i;			
+		
+	//this saves time because, j is going linearly
+	        i=2,  j=4
+—-----
+Follow Up:
+	Q. Given an array B find the number of pairs such that 
+       L <= (b[i] + b[j]) <= R.
+Code: https://ideone.com/5vREcz
+       eg.
+	0 1 2 3 4 5 6 
+L = 3 R = 5
+
+F[g] = number of pairs such that b[i] + b[j] <=g 
+Answer = F[R] - F[L-1] 
+       TC:
+O(N) to calculate F[L-1] 
+O(N) to calculate F[R]
+Hence O(2N + Nlog N(for sorting)] = O(NlogN) 
+—------------------------------------
+Q. 12  Given Array A and Array B :- Find out if array B is a subsequence of array A. 
+Code: https://replit.com/@PATILSHRUTI/2ptr-findoutIfBisSubsequenceOfA#src/main/java/Main.java
+Desc:   Array A = [1 2 5 8 8 6 5 4 3] 
+Array B = [5 5]
+O/P - True; 
+i=0; j=0
+while(i<m && j<m)
+if(b[i]==a[j]{ i++; j++; cnt++}
+Else j++;
+if(cnt==m)  =>  return true;
+Else  =>  return false;
+
+—-----
+Q.13  Given two arrays A and B :- Find the number of good indices in array B.	
+	Good Index meaning - When you remove this index :- array B becomes a subsequence        of array A.
+	Pre-req =>  Q.12
+Code: https://replit.com/@PATILSHRUTI/2ptr-findNoOFGood-IndicesGivenArrayAandB
+
+
+	PrefB, suffB
+** Dry run once again
+—--------------------------------------
+Q.14  https://www.desiqna.in/16582/microsoft-sde-oa-coding-questions-set-119
+
+5 2 4 3
+L=2, R=3
+Brute Force:  https://replit.com/@PATILSHRUTI/2ptr-SmallestSubarrayWithEleInRangeL-R-1-Brute-Force
+Generate all subarray., map={ele->freq}
+Store ele in map, only if; ele is in range from L to R.
+Check  if map.size() == (L-R+1)	
+cnt++, update min length of subarray.
+		print(cnt);
+   TC: O(N^2)    SC: O(R-L+1)
+ 
+Efficient:   https://ideone.com/pPFUp6
+	5 2 3 4 1 8
+L=2    R= 4
+Doc: https://docs.google.com/document/d/1JKXT3iYyiFUNa5vuqKfeBTCVzTVEmGHq7mHlw9Gmoyw/edit
+
+—----------------------------------
+**** Template for Shortest subarray problem
+
+Q.15  Given an array of all non-negative numbers; find the shortest subarray whose sum >= K.
+
+Desc: 
+         Brute Force: https://replit.com/@PATILSHRUTI/2ptr-ShortestsubarraySumgreaterk1-Brute-Force
+		int ans = Integer.MAX_VALUE;
+	Generate all subarrays, 
+check if sum>=k, 
+update min length.
+TC: O(N^2)    SC: O(1)
+
+     Optimization:  https://replit.com/@PATILSHRUTI/2ptrTemplate-ShortestsubarraySumgreaterk2-Efficient
+		int n = nums.size();
+    		int minLength = numeric_limits<int>::max();
+            int windowSum = 0;
+int left = 0;
+
+          for (int right = 0; right < n; ++right) {
+        windowSum += nums[right];
+        while (windowSum >= k && left<=right) {
+      // -> in the whole algorithm this loop will only go from left = 0 till left = n-1 so only total O(N) //extra operations.
+        		minLength = min(minLength, right - left + 1);
+windowSum -= nums[left];
+            ++left;
+}
+if(left<=right){
+        	
+        	}
+      	else{
+        		 	        right = left;
+         		}
+    //RRRRR
+    	}
+	Desc:
+		left=right=0;
+		Sum += a[right];
+		Until sum>=k && left<=right; 
+//to find shortest length subarray.
+move left++;
+Remove a[left] from sum //moving window.
+		If left>right;
+			right = left;
+		1 5 20 3 4        K=15
+		Ans = 1
+TC: O(2*N)		//amortized
+SC: O(1)
+ 
+—---------------------------------------------
+
+Q. 16  Practice Question for above shortest length subarray template.
+	https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/description/
+TC :- O(N*30)
+Takes O(N*30*2) size bit array and prefix arrays. 
+
+—-------------------------------------------------
+
+ Q.17   Longest subarray having sum of elements at most K.
+		B = [2 5 8 8 5 8] 
+K = 7 
+Answer :- [1,2] = [2+5] = 7 -> 2(length is 2).
+  Brute Force:
+https://ideone.com/Fj0Sgz
+	Generate all subarrays, check sum, update longest length subarray.
+	TC: O(n^2)	SC: O(1)
+***      Efficient: 
+https://replit.com/@PATILSHRUTI/2ptr-longestSubarraySumAtMostK-2-Efficient-1#src/main/java/Main.java
+1 2 1 0 1 1 0  k=4
+
+1 0 1 1 0 = length=5
+
+
+***** do dry run & pseudo code & code once again.
+—------------------------------------------------------
+
+
+Q.18  Google SDE OA.
+	Q: https://leetcode.com/discuss/interview-question/3549864/Google-or-sliding-window
+	Code:
+	Desc: Q understanding- given array, arr[i] is angle at which 1 building is present.
+		arr = [5, 9, 20, 22, 28, 35, 60, 350, 358, 359, 360]
+field of view = 30
+1 building at angle 5 degree,
+1 building at angle 9 degree,
+.
+.
+1 building at angle 360 degree,
+
+Find out the maximum no of buildings you can get/capture in 30 degrees(field of view).
+
+I.e Given an array of numbers which are sorted find the largest subarray such that the difference between abs(maximum-minimum)<=K.
+
+
+***** do dry run & pseudo code & code.
+Session 11
+
+—------------------------------------------------------
+
+Q.19 Number of subarrays having sum <= K. (count subarrays)
+	Brute Force: https://replit.com/@PATILSHRUTI/2ptr-FindNoOfSubarraysWithSumlessk1-brute-force?v=1
+	Efficient: https://replit.com/@PATILSHRUTI/2ptr-FindNoOfSubarraysWithSumlessk2-efficient
+	Desc:
+		Similar to the longest subarray with sum <=k.
+		i=0, j=0
+		j will increase sum, i will decrease sum. Update cnt += j-i+1;
+
+           i-> start part of the subarray
+j-> end part of the subarray
+ [i....j]
+	//for each index i you need to find the largest j such that sum[i....j]<=k ; once
+// you find such j you know that there are (j-i) + 1 subarrays starting at index i such that their sum<=k
+//sum[i...i]<=k
+//sum[i...i+1]<=k
+//.
+//..
+//..sum[i....j]<=k
+
+
+Q. 20  Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
+	Question : https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/
+Code:
+
+
+Session 12
+
+—------------------------------------------------------
+
+Q. 21  Find the number of subarrays having sum in the range L to R (inclusive).
+	https://www.geeksforgeeks.org/problems/count-the-number-of-subarrays/1
+	Code:  https://www.geeksforgeeks.org/problems/count-the-number-of-subarrays/1
+	Desc: 
+		 long ans1 = count(N, A, L - 1);
+ long ans2 = count(N, A, R);
+             return ans2 - ans1;
+
+* Very easy, Dry run once
+
+—----------------------------------------------------------
+
+Q.22  Count pairs in a sorted array whose sum is less than x.
+	Question: https://www.geeksforgeeks.org/count-pairs-array-whose-sum-less-x/
+	Code: https://replit.com/@PATILSHRUTI/2ptr-CountPairsWithSumlessX2-Efficient
+	Des:  l=0; r = n-1
+		if(sum>=x)//decrease the sum j-- 
+		Else=> if (l+r) <x then (l + l+1), (l +  l+3)...(l+   r-1) all pairs are valid(sum<x). 
+			Thus cnt += r-l;
+         l = l+1;	//check possible elements that can pair up with (l+1)
+TC: O(N)
+SC: O(1)
+
+—------------------------------------------------
+
+Q. 23
+	Question:
+	Code- My code needs modification : https://replit.com/@PATILSHRUTI/2ptr-LargestSubarrWithNoOfGlessk2-EfficientMyCodeToModify?v=1
+	Code:- https://ideone.com/RIGFx4
+
+        *Do dry run on efficient one and write it here    https://replit.com/@PATILSHRUTI/2ptr-LargestSubarrWithNoOfGlessk2-Efficient#src/main/java/Main.java
+
+
+Q.24  Google SDE Interview. :-> Given an array of numbers ; find the longest subarray which has number g1 coming for <=k1 times. (-->k1 or k1-1 or k1-2 or k1-3 or….1 or 0) + g2 coming for <=k2 times. + g3 coming for <=k3 times. 
+	code:
+
+Do this code, very similar to previous question(Q.23)
+
+Q.25  TO DO
+	Question: https://leetcode.com/contest/biweekly-contest-119/problems/length-of-longest-subarray-with-at-most-k-frequency/
+	Given code: https://leetcode.com/submissions/detail/1115882801/
+	
+Do solve this.
+
+Session 15
+
+—--------------------------------------------
+Q.26  given 2 arrays, find the unique pairs possible such that a[i]>b[j].
+	unique=> Once used element cannot be used again.
+Question: https://www.desiqna.in/16386/expedia-oa-coding-questions-ctc-20l-set-3-2024
+Eg.
+N = 3
+A = [1 2 3]
+B = [1 2 1]
+Ans: 2 
+2 such pairs are possible.
+(2, 1), (3,2)
+Code: 1] Brute force:
+i = 0  ->  n
+j=0 -> n
+if(a[i]>b[j]){  
+cnt++; 
+ b[j]=-1;	//mark used.
+}
+TC: O(n)	SC: O(1)
+
+2] Efficient:   https://replit.com/@PATILSHRUTI/2ptrExpediaOAnoOfPairsaigreaterbjEfficient
+	Desc: Sort a,b;
+TC= O(nlogn + nlogn + n + n)=> O(nlogn + 2n) => O(n log n); 
+SC= O(1), but internal space is needed for sorting the arrays and its O(x) in C++ ; O(y) in Java ; O(g) in Py for inbuilt libraries in the languages. If you implement the sorting algorithm on your own then it will be the space used by that sorting algorithm. 
+
+—----------------------------------------------------
+
+Q.27 Move Zeroes:
+	move all 0's to the end of the given array while maintaining the relative order of the non-zero elements.
+Note  :  you must do this in-place without making a copy of the array.
+Code:  https://leetcode.com/problems/move-zeroes/submissions/1281133868/
+TC: O(N)	SC:(1)
+—-----------------------------------------------------
+
+Q.28
+
+			
+—----------------------------------------------------------------------------------------------------------------
+
+
+
+
+To solve:
+
+Session 12 doc at end practice prbms.
+	Similar LeetCode Problem :- 
+
+https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/ 
+
+https://www.geeksforgeeks.org/count-pairs-array-whose-sum-less-x/ 
+
+https://leetcode.com/contest/weekly-contest-359/problems/find-the-longest-equal-subarray/ 
+
+
+
+
+
+—---------------------------------------------------------------------------------------------------------------
+
+*** N^2 Time Complexity
+
+ 0  0  0  0  0
+i,j	     n
+
+2 nested for loops	
+i=1, j= 1 -> n  i.e n
+i=2, j= 2 -> n  i.e n-1
+i=3, j= 3 -> n  i.e n-2
+i=4, j= 4 -> n  i.e n-3
+
+this looks like this:=
+=>	N*N-(1+2+3..)
+=>	N^2 - (n*(n+1))/2
+=>	N^2 - ((n^2 /2) + (N/2))
+=>	N^2 /2  -  N/2	
+
+n is very small compared to N^2, so ignore n & ignore constants.
+
+—-----------------------------------------------------------------------------------------------------------------------
+When to use hashing and 2 ptr in subarray problems ?
+->Hashing can solve almost array problems.
+->2 ptr we can use if there is a monotonous function.
+
+monotonous =>  
+			        -	
+    -	-
+  -	  -
+-	    -
+
+
+Like this : TTTTTFFFFF
+
+If this property is there, then you can solve with 2 ptr:
+Whenever you can see that you can take the i & j.
+And you can see that whenever I'm increasing the j, I am getting the correct ans.
+& finally for particular j the ans is breaking & it is breaking forever.
+—----------------------------------------------------------------------------------------------------------------------------
+
+Number of subarrays possible in an array of size n are = (n*(n+1))  / 2
+I.e for every array of size n there can be n*(n+1)/2 subarrays.
+—----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+		
